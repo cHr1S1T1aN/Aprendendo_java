@@ -14,6 +14,7 @@ public class GradeBookTest
 		
 		System.out.println("testando o nome dos cursos: " + myGradeBook1.getCourseName() );
 		myGradeBook.displayMessage();
+		myGradeBook.calc();
 	}
 }
 
