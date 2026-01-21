@@ -1,20 +1,69 @@
-import java.awt.Graphics;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.*;
 
+public class DrawPanel extends JPanel {
 
-public class DrawPanel extends JPanel
- {
- // desenha um X a partir dos cantos do painel
- public void paintComponent( Graphics g )
- {
- // chama paintComponent para assegurar que o painel seja exibido corretamente
- super.paintComponent( g );
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
- int width = getWidth(); // largura total
- int height = getHeight(); // altura total
+        Graphics2D g2D = (Graphics2D) g;
+        // Desenha 3 linhas de estrelas
+        Star star = new Star(0, 0); // cria forma de estrela
+        float delta = 60f; // distância entre estrelas
+        float startY = 20f;
 
- // desenha uma linha a partir do canto superior esquerdo até o inferior direito
- g.drawLine( 180, 0, width, height );
+        for (int y = 0; y < 3; y++) {
+            float x = 20f; // posição inicial na linha
+            for (int i = 0; i < 4; i++) {
+                // desenha a estrela em cada ponto
+                Shape s = star.atLocation(x, startY);
+                g2D.draw(s);
+                x += delta;
+            }
+            startY += delta;
+        }
+    }
 
- } // fim do método paintComponent
-} // fim da classe DrawPane
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Estrelas legais!");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.add(new DrawPanel());
+        frame.setVisible(true);
+    }
+}
+
+class Star {
+    private java.awt.geom.GeneralPath path;
+    private float startX;
+    private float startY;
+
+    public Star(float x, float y) {
+        this.startX = x;
+        this.startY = y;
+        createStar();
+    }
+
+    private void createStar() {
+        path = new GeneralPath();
+        path.moveTo(startX, startY);
+        path.lineTo(startX + 20, startY - 5);
+        path.lineTo(startX + 5, startY - 20);
+        path.lineTo(startX - 5, startY - 20);
+        path.lineTo(startX - 20, startY - 5);
+        path.lineTo(startX - 20, startY + 5);
+        path.lineTo(startX - 5, startY + 20);
+        path.lineTo(startX + 5, startY + 20);
+        path.lineTo(startX + 20, startY + 5);
+        path.closePath();
+    }
+
+    public Shape atLocation(float x, float y) {
+        startX = x;
+        startY = y;
+        createStar(); // recalcula a forma em nova posição
+        return path;
+    }
+}
