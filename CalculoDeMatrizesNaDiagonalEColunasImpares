@@ -1,0 +1,50 @@
+		/*
+		 * //	static final int LIN = 3;
+//				static final int COL = 3;
+//	
+			Scanner input = new Scanner(System.in);
+			
+			int mat[][] = new int [LIN][COL];
+			int dp=0;
+			int somaI = 0;
+			for (int i = 0; i < LIN; i++) {
+				for(int j = 0;j < COL;j ++) {
+					System.out.println("Digite um valor: ");
+					mat[i][j] = input.nextInt();
+				}
+			}
+			//APRESENTAÇÃO
+			System.out.println("MATRIZES");
+			for (int i = 0; i < LIN; i++) {
+				for(int j = 0;j < COL;j ++) {
+					System.out.print("["+mat[i][j]+"]");
+				}
+				System.out.println("");
+			}
+			
+			//CALCULO DIAGONAL PRINCIPAL DE UMA MATRIZ
+			for(int i=0;i < LIN; i++) {
+				for(int j=0;j < COL; j++) {
+					if (i==j) {
+						dp = dp + mat[i][j];
+					}
+				}
+			}
+			System.out.println("DIAGONAL PRINCIPAL: " + dp);
+			
+			//SOMATORIA DAS COLUNAS IMPARES DA MATRIZ
+			for(int i = 0;i < LIN; i++) {
+				for(int j =0;j < COL; j++) {
+					if (((i + 1)%2)!=0) {
+						somaI += mat[i][j];
+					}
+				}
+			}
+			
+			System.out.println("SOMA DAS COLUNAS IMPARES: " + somaI);
+			*/
+//			for (i = 0; i < 2; i++) {
+//				for(j = 0;j < 2;j ++) {
+//					System.out.println("mat["+i+"]"+"["+j+"] = "+ mat[i]);			
+//					}
+//			}
